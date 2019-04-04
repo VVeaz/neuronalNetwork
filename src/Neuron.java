@@ -8,6 +8,9 @@ class Neuron {
     private double weightedSum;
 
     Neuron(int size) {
+        generateRandomWeights(size);
+    }
+    void generateRandomWeights(int size){
         weight = new LinkedList<>();
         Random generator = new Random();
         for (int i=0; i<size; i++){
@@ -39,4 +42,7 @@ class Neuron {
         }
     }
 
+    List<Double> getWeight() {
+        return weight;
+    }
 }
