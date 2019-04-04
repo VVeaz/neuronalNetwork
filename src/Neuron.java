@@ -27,15 +27,12 @@ class Neuron {
             return 1;
         return 0;
     }
-    void learn(int[]x0, int[]x1, int[] answer, double learningCoefficient ){
+    void learn(int[]x0, int[]x1, int[] answer, double c ){
         Random generatorIndex = new Random();
         for(int i=0; i<50000; i++){
             int index = generatorIndex.nextInt(x0.length);
             calculate(x0[index],x1[index]);
-            double newWeightX0 = weight.get(0)+x0[index]*(answer[index]-stepFunction())*learningCoefficient;
-            double newWeightX1 = weight.get(1)+x1[index]*(answer[index]-stepFunction())*learningCoefficient;
-            weight.set(0, newWeightX0);
-            weight.set(1,newWeightX1);
+            double newWeightX0 = weight.get(index)+x0[index]*(answer[index]-stepFunction())*c;
         }
     }
 
