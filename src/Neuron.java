@@ -2,6 +2,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
+import static java.lang.StrictMath.min;
+
 class Neuron {
 
     private List<Double>weight;
@@ -32,11 +34,11 @@ class Neuron {
     }
     void learn(int[]x0, int[]x1, int[] answer, double learningCoefficient ){
         Random generatorIndex = new Random();
-        for(int i=0; i<50000; i++){
+        for(int i=0; i<500000; i++){
             int index = generatorIndex.nextInt(x0.length);
             calculate(x0[index],x1[index]);
-            double newWeightX0 = weight.get(0)+x0[index]*(answer[index]-stepFunction())*learningCoefficient;
-            double newWeightX1 = weight.get(1)+x1[index]*(answer[index]-stepFunction())*learningCoefficient;
+            double newWeightX0 = min(weight.get(0)+x0[index]*(answer[index]-stepFunction())*learningCoefficient,1);
+            double newWeightX1 = min(weight.get(1)+x1[index]*(answer[index]-stepFunction())*learningCoefficient,1);
             weight.set(0, newWeightX0);
             weight.set(1,newWeightX1);
         }
